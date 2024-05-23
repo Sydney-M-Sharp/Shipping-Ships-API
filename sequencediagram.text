@@ -1,0 +1,37 @@
+title Shipping Ships
+
+participant Client
+participant Python
+participant JSONServer
+participant views
+participant Database
+
+Client->Python:GET request to "/ships"
+Python->JSONServer:Run do_GET() method
+
+JSONServer->views:retrieve_ships
+views->Database:retrieve_ship with PK using query
+views<--Database:returns data
+JSONServer<--views:return serialized_ship 
+Client<--JSONServer:Here's all yer ships (in JSON format) response with HTTP success code \n
+
+Client->Python:GET request to "/docks"
+Python->JSONServer:Run do_GET() method
+JSONServer->views:retrieve_docks
+views->Database:retrieve_docks with PK using query
+views<--Database:returns data
+JSONServer<--views:return return serialized_dock
+Client<--JSONServer:Here's all yer ships (in JSON format) response with HTTP success code \n
+
+
+Client->Python:GET request to "/haulers"
+Python->JSONServer:Run do_GET() method
+
+JSONServer->views:retrieve_haulers
+views->Database:retrieve_haulers with PK using query
+views<--Database:returns data
+JSONServer<--views:return serialized_haulers
+Client<--JSONServer:Here's all yer ships (in JSON format) response with HTTP success code \n
+
+note over Python,JSONServer
+Python->(3)JSONServer
